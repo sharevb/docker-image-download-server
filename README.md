@@ -97,6 +97,12 @@ HOST=127.0.0.1 PORT=3000 node server.js
 
 ## **Running in Docker**
 
+Pull latest image:
+
+```
+docker pull sharevb/docker-image-download-server:latest
+```
+
 Run it with access to the host Docker daemon:
 
 ```
