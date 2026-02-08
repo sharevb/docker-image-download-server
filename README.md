@@ -40,6 +40,7 @@ Supports:
 |---------|---------|-------------|
 | `HOST`  | `0.0.0.0` | Interface to bind the HTTP server |
 | `PORT`  | `3000` | Port to listen on |
+| `CORS`  | `*3000*` | CORS Allowed Origins |
 
 ## **API**
 

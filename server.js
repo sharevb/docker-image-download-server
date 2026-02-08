@@ -3,8 +3,10 @@ import { spawn } from "child_process";
 import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
+import cors from "cors";
 
 const app = express();
+const CORS = process.env.CORS || "*"; 
 const HOST = process.env.HOST || "0.0.0.0"; 
 const PORT = parseInt(process.env.PORT || "3000", 10); 
 
@@ -17,6 +19,22 @@ const VALID_PLATFORMS = new Set([
   "linux/s390x",
   "windows/amd64"
 ]);
+
+// Parse env vars
+function parseList(value, fallback) {
+  if (!value) return fallback;
+  if (value === "*") return "*";
+  return value.split(",").map(v => v.trim());
+}
+
+// --- CORS configuration ---
+app.use(cors({
+  origin: parseList(CORS, "*"),
+  methods: ["GET"],         // your service only exposes GET /download
+  allowedHeaders: ["*"],    // allow all headers
+  exposedHeaders: ["Content-Disposition"], // needed so browser can read filename
+}));
+
 
 app.get("/download", async (req, res) => {
   const image = req.query.image;
