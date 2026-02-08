@@ -1,0 +1,13 @@
+{
+  "name": "docker-image-download-server",
+  "version": "1.0.0",
+  "description": "Node server to pull and save Docker images with platform and registry auth support",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}
