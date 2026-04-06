@@ -40,7 +40,7 @@ Supports:
 |---------|---------|-------------|
 | `HOST`  | `0.0.0.0` | Interface to bind the HTTP server |
 | `PORT`  | `3000` | Port to listen on |
-| `CORS`  | `*3000*` | CORS Allowed Origins |
+| `CORS`  | `*` | CORS Allowed Origins |
 
 ## **API**
 
@@ -120,6 +120,3 @@ docker run \
 ## **License**
 
 MIT
-- A **client CLI tool** to interact with this service
-
-Just tell me what direction you want to take this project.
