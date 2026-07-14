@@ -9,6 +9,7 @@ const app = express();
 const CORS = process.env.CORS || "*"; 
 const HOST = process.env.HOST || "0.0.0.0"; 
 const PORT = parseInt(process.env.PORT || "3000", 10); 
+const BASIC_AUTH = process.env.BASIC_AUTH || "";
 
 const VALID_PLATFORMS = new Set([
   "linux/amd64",
@@ -35,6 +36,28 @@ app.use(cors({
   exposedHeaders: ["Content-Disposition"], // needed so browser can read filename
 }));
 
+// --- Basic auth middleware ---
+app.use((req, res, next) => {
+  if (!BASIC_AUTH) {
+    return next();
+  }
+
+  const auth = req.headers.authorization;
+  if (!auth || !auth.startsWith("Basic ")) {
+    res.setHeader("WWW-Authenticate", "Basic realm=\"Docker Image Download\"");
+    res.status(401).send("Unauthorized");
+    return;
+  }
+
+  const credentials = Buffer.from(auth.slice(6), "base64").toString("utf8");
+  if (credentials !== BASIC_AUTH) {
+    res.setHeader("WWW-Authenticate", "Basic realm=\"Docker Image Download\"");
+    res.status(401).send("Unauthorized");
+    return;
+  }
+
+  next();
+});
 
 app.get("/download", async (req, res) => {
   const image = req.query.image;

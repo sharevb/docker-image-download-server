@@ -40,7 +40,8 @@ Supports:
 |---------|---------|-------------|
 | `HOST`  | `0.0.0.0` | Interface to bind the HTTP server |
 | `PORT`  | `3000` | Port to listen on |
-| `CORS`  | `*3000*` | CORS Allowed Origins |
+| `CORS`  | `*` | CORS allowed origins (`*` = all) |
+| `BASIC_AUTH` | `` | Enable HTTP Basic Auth for the API; set to `username:password` |
 
 ## **API**
 
